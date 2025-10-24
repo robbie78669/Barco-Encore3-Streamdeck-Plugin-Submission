@@ -1,14 +1,13 @@
 # Encore3 Stream Deck Plugin
 
-This repository contains the source code for the Encore3 Stream Deck Plugin, developed by Robbie Bruce from Barco NV. This plugin provides a set of actions to control Barco Encore3 devices directly from an Elgato Stream Deck.
+This repository contains the necessary files to submit the Encore3 Stream Deck Plugin for Elgato Marketplace, developed by Robbie Bruce from Barco NV. This plugin provides a set of actions to control Barco Encore3 devices directly from an Elgato Stream Deck.
+
+[Barco Encore3 Website](https://www.barco.com/en/product/encore3)
 
 ## Table of Contents
 - [Features](#features)
 - [Installation](#installation)
-- [Development](#development)
-- [Architecture](#architecture)
-- [Contributing](#contributing)
-- [License](#license)
+- [Description](#description)
 
 ## Features
 
@@ -34,66 +33,13 @@ The plugin offers a variety of actions to streamline control over Encore3 system
 
 To install the plugin, download the `com.barco.encore3.sdPlugin` package and double-click it. The Elgato Stream Deck software will handle the installation.
 
-## Development
+## Description
 
-This project is a TypeScript-based Elgato Stream Deck plugin, bundled with Rollup.
-
-### Prerequisites
-
-*   Node.js (version 20 or higher recommended)
-*   npm or yarn
-
-### Setup
-
-1.  Clone the repository:
-    ```bash
-    git clone https://github.com/robbie78669/encore3.git
-    cd encore3
-    ```
-2.  Install dependencies:
-    ```bash
-    npm install
-    ```
-
-### Building the Plugin
-
-To build the plugin for distribution:
-```bash
-npm run build
-```
-This command compiles the TypeScript code and bundles it into `com.barco.encore3.sdPlugin/bin/plugin.js`.
-
-### Watching for Changes
-
-For development, you can use the watch script, which automatically rebuilds the plugin and restarts the Stream Deck application upon changes:
-```bash
-npm run watch
-```
-
-## Architecture
-
-The plugin follows a standard Elgato Stream Deck plugin architecture:
-
-*   **`com.barco.encore3.sdPlugin/`**: This directory contains the plugin's manifest, UI files, images, and the compiled JavaScript code.
-    *   `manifest.json`: Defines the plugin's metadata, actions, and their properties.
-    *   `ui/`: Contains HTML files for the Property Inspectors (UI that appears when configuring an action in Stream Deck).
-    *   `imgs/`: Stores icons and images used by the plugin and its actions.
-    *   `bin/plugin.js`: The compiled and bundled JavaScript code for the plugin.
-*   **`src/`**: Contains the TypeScript source code.
-    *   `plugin.ts`: The main entry point of the plugin, responsible for initializing and registering all actions with the Stream Deck client. It also handles global settings, including caching and restoring Encore3 frame connections.
-    *   `actions/`: A directory containing individual TypeScript files for each Stream Deck action. Each file defines the logic for a specific action (e.g., `allTrans.ts`, `cut.ts`, `recallPreset.ts`).
-    *   `device/`: Contains logic for communicating with Encore3 devices, including `emFrame.ts` for managing Encore3 frame data and connections.
-    *   `common/`: Shared utilities, such as `settingsHandler.ts`.
-    *   `utils.ts`: General utility functions, including a custom logger.
-*   **Build Process**:
-    *   The project uses **TypeScript** for type-safe development.
-    *   **Rollup** is used as the module bundler, configured via `rollup.config.mjs`. It compiles `src/plugin.ts` into a single JavaScript file (`com.barco.encore3.sdPlugin/bin/plugin.js`), including source maps and minification (via Terser) for production builds.
-    *   The `@elgato/streamdeck` SDK is used for interacting with the Stream Deck application.
-*   **Device Communication**: The plugin establishes and manages connections to Encore3 frames (devices) using their IP addresses. These connections are persisted across Stream Deck restarts via global settings.
-
-## User Guide: Property Inspectors
+The Encore3 Streamdeck plugin enables an operator to interact with one or more Encore3 frames using various Encore3 actions.   
 
 Each action in the Encore3 Stream Deck Plugin can be configured using its Property Inspector (PI). The PI is a web-based interface that appears in the Stream Deck software when you drag an action onto a key. It allows you to customize the behavior of the action by selecting Encore3 hosts, operators, sources, presets, and other relevant parameters.
+
+For more information regarding Encore3, please visit [Barco's Encore product page](https://www.barco.com/en/product/encore3)
 
 ### Common Elements
 
@@ -116,49 +62,42 @@ Most Property Inspectors share common configuration elements:
 
 Beyond the common elements, each action's Property Inspector provides specific settings. Below is a list of actions with their respective key icons and configuration options:
 
-*   **All Trans** ![All Trans Key](com.barco.encore3.sdPlugin/imgs/actions/allTrans/allTransKey.png)
+*   **All Trans** ![All Trans Key](/imgs/actions/allTrans/allTransKey.png)
     *   **Trans time (frames)**: Sets the transition duration in frames (e.g., 30 frames for a 1-second transition at 30fps).
-*   **Cut** ![Cut Key](com.barco.encore3.sdPlugin/imgs/actions/cut/cutKey.png)
+*   **Cut** ![Cut Key](/imgs/actions/cut/cutKey.png)
     *   No additional action-specific settings.
-*   **Change Source in Aux** ![Change Source in Aux Key](com.barco.encore3.sdPlugin/imgs/actions/cutAux/cutAuxKey_PVW.png)
+*   **Change Source in Aux** ![Change Source in Aux Key](/imgs/actions/cutAux/cutAuxKey_PVW.png)
     *   **Aux**: Selects the auxiliary output to change the source on.
     *   **Source**: Selects the input source to assign to the chosen auxiliary output.
-*   **Change Source in Layer** ![Change Source in Layer Key](com.barco.encore3.sdPlugin/imgs/actions/cutLayer/cutLayerKey_PVW.png)
+*   **Change Source in Layer** ![Change Source in Layer Key](/imgs/actions/cutLayer/cutLayerKey_PVW.png)
     *   **Screen Destination**: Selects the screen destination containing the layer.
     *   **Layer**: Selects the specific layer (e.g., 1A, 1B) within the chosen screen destination.
     *   **Source**: Selects the input source to assign to the chosen layer.
-*   **Recall Preset** ![Recall Preset Key](com.barco.encore3.sdPlugin/imgs/actions/recallPreset/recallPresetKey_PVW.png)
+*   **Recall Preset** ![Recall Preset Key](/imgs/actions/recallPreset/recallPresetKey_PVW.png)
     *   **Preset**: Selects the preset to recall.
     *   **Recall to**: Choose whether to recall the preset to "Preview" or "Program".
-*   **Recall Next Preset** ![Recall Next Preset Key](com.barco.encore3.sdPlugin/imgs/actions/recallNextPreset/recallNextPresetKey.png)
+*   **Recall Next Preset** ![Recall Next Preset Key](/imgs/actions/recallNextPreset/recallNextPresetKey.png)
     *   No additional action-specific settings.
-*   **Cue** ![Cue Key](com.barco.encore3.sdPlugin/imgs/actions/recallCue/recallCueKey.png)
+*   **Cue** ![Cue Key](/imgs/actions/recallCue/recallCueKey.png)
     *   **Cue**: Selects the cue to recall.
     *   **Action**: Choose the action to perform on the cue: "Recall", "Pause", or "Stop".
-*   **Freeze** ![Freeze Key](com.barco.encore3.sdPlugin/imgs/actions/freeze/freezeKey.png)
+*   **Freeze** ![Freeze Key](/imgs/actions/freeze/freezeKey.png)
     *   **Source**: Selects the input source to freeze.
-*   **Unfreeze** ![Unfreeze Key](com.barco.encore3.sdPlugin/imgs/actions/unfreeze/unfreezeKey.png)
+*   **Unfreeze** ![Unfreeze Key](/imgs/actions/unfreeze/unfreezeKey.png)
     *   **Source**: Selects the input source to unfreeze.
-*   **Use Input Backup** ![Use Input Backup Key](com.barco.encore3.sdPlugin/imgs/actions/recallSourceBackup/recallSourceBackUp1Key.png)
+*   **Use Input Backup** ![Use Input Backup Key](/imgs/actions/recallSourceBackup/recallSourceBackUp1Key.png)
     *   **Input**: Selects the primary input for which to activate a backup.
     *   **Backup**: Selects the specific backup source to use for the chosen input.
-*   **Use Primary Input** ![Use Primary Input Key](com.barco.encore3.sdPlugin/imgs/actions/resetSourceBackup/resetsourcebackupKey.png)
+*   **Use Primary Input** ![Use Primary Input Key](/imgs/actions/resetSourceBackup/resetsourcebackupKey.png)
     *   **Input**: Selects the input for which to reset to its primary source.
-*   **Change MVR Layout** ![Change MVR Layout Key](com.barco.encore3.sdPlugin/imgs/actions/mvrLayoutChange/mvrLayoutChangeKey.png)
+*   **Change MVR Layout** ![Change MVR Layout Key](/imgs/actions/mvrLayoutChange/mvrLayoutChangeKey.png)
     *   **MVR Layout**: Selects the desired multiviewer layout.
-*   **Recall MVR Preset** ![Recall MVR Preset Key](com.barco.encore3.sdPlugin/imgs/actions/recallMvrPreset/recallMvrPresetKey.png)
+*   **Recall MVR Preset** ![Recall MVR Preset Key](/imgs/actions/recallMvrPreset/recallMvrPresetKey.png)
     *   **MVR Preset**: Selects the multiviewer preset to recall.
-*   **Aux Test Pattern** ![Aux Test Pattern Key](com.barco.encore3.sdPlugin/imgs/actions/recallTestPatternOnAux/recallTestPatternAuxKey.png)
+*   **Aux Test Pattern** ![Aux Test Pattern Key](/imgs/actions/recallTestPatternOnAux/recallTestPatternAuxKey.png)
     *   **Aux**: Selects the auxiliary output to display the test pattern on.
     *   **Test Pattern**: Selects the specific test pattern to display (e.g., "100% Color Bars", "Black").
-*   **Screen Test Pattern** ![Screen Test Pattern Key](com.barco.encore3.sdPlugin/imgs/actions/recallTestPatternOnScreen/recallTestPatternScreenKey.png)
+*   **Screen Test Pattern** ![Screen Test Pattern Key](/imgs/actions/recallTestPatternOnScreen/recallTestPatternScreenKey.png)
     *   **Screen**: Selects the screen destination to display the test pattern on.
     *   **Test Pattern**: Selects the specific test pattern to display.
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit pull requests or open issues for any bugs or feature requests.
-
-## License
-
-This project is licensed under the [LICENSE](LICENSE) file.
